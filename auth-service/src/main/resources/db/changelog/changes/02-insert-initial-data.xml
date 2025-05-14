@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.20.xsd">
+
+    <changeSet id="02" author="system">
+        <!-- Insert Permissions -->
+        <insert tableName="permissions">
+            <column name="id" value="11111111-1111-1111-1111-111111111111"/>
+            <column name="version" value="0"/>
+            <column name="created_at" valueDate="CURRENT_TIMESTAMP"/>
+            <column name="created_by" value="system"/>
+            <column name="updated_at" valueDate="CURRENT_TIMESTAMP"/>
+            <column name="updated_by" value="system"/>
+            <column name="active" valueBoolean="true"/>
+            <column name="name" value="READ_USER"/>
+            <column name="description" value="Permission to read user data"/>
+        </insert>
+        <insert tableName="permissions">
+            <column name="id" value="22222222-2222-2222-2222-222222222222"/>
+            <column name="version" value="0"/>
+            <column name="created_at" valueDate="CURRENT_TIMESTAMP"/>
+            <column name="created_by" value="system"/>
+            <column name="updated_at" valueDate="CURRENT_TIMESTAMP"/>
+            <column name="updated_by" value="system"/>
+            <column name="active" valueBoolean="true"/>
+            <column name="name" value="WRITE_USER"/>
+            <column name="description" value="Permission to create and update user data"/>
+        </insert>
+        <insert tableName="permissions">
+            <column name="id" value="33333333-3333-3333-3333-333333333333"/>
+            <column name="version" value="0"/>
+            <column name="created_at" valueDate="CURRENT_TIMESTAMP"/>
+            <column name="created_by" value="system"/>
+            <column name="updated_at" valueDate="CURRENT_TIMESTAMP"/>
+            <column name="updated_by" value="system"/>
+            <column name="active" valueBoolean="true"/>
+            <column name="name" value="DELETE_USER"/>
+            <column name="description" value="Permission to delete user data"/>
+        </insert>
+        <insert tableName="permissions">
+            <column name="id" value="44444444-4444-4444-4444-444444444444"/>
+            <column name="version" value="0"/>
+            <column name="created_at" valueDate="CURRENT_TIMESTAMP"/>
+            <column name="created_by" value="system"/>
+            <column name="updated_at" valueDate="CURRENT_TIMESTAMP"/>
+            <column name="updated_by" value="system"/>
+            <column name="active" valueBoolean="true"/>
+            <column name="name" value="ADMIN_ACCESS"/>
+            <column name="description" value="Full administrative access"/>
+        </insert>
+
+        <!-- Insert Roles -->
+        <insert tableName="roles">
+            <column name="id" value="11111111-1111-1111-1111-111111111112"/>
+            <column name="version" value="0"/>
+            <column name="created_at" valueDate="CURRENT_TIMESTAMP"/>
+            <column name="created_by" value="system"/>
+            <column name="updated_at" valueDate="CURRENT_TIMESTAMP"/>
+            <column name="updated_by" value="system"/>
+            <column name="active" valueBoolean="true"/>
+            <column name="name" value="USER"/>
+            <column name="description" value="Regular user role"/>
+        </insert>
+        <insert tableName="roles">
+            <column name="id" value="22222222-2222-2222-2222-222222222223"/>
+            <column name="version" value="0"/>
+            <column name="created_at" valueDate="CURRENT_TIMESTAMP"/>
+            <column name="created_by" value="system"/>
+            <column name="updated_at" valueDate="CURRENT_TIMESTAMP"/>
+            <column name="updated_by" value="system"/>
+            <column name="active" valueBoolean="true"/>
+            <column name="name" value="ADMIN"/>
+            <column name="description" value="Administrative role with elevated privileges"/>
+        </insert>
+
+        <!-- Assign Permissions to Roles -->
+        <insert tableName="role_permissions">
+            <column name="role_id" value="11111111-1111-1111-1111-111111111112"/>
+            <column name="permission_id" value="11111111-1111-1111-1111-111111111111"/>
+        </insert>
+        <insert tableName="role_permissions">
+            <column name="role_id" value="22222222-2222-2222-2222-222222222223"/>
+            <column name="permission_id" value="11111111-1111-1111-1111-111111111111"/>
+        </insert>
+        <insert tableName="role_permissions">
+            <column name="role_id" value="22222222-2222-2222-2222-222222222223"/>
+            <column name="permission_id" value="22222222-2222-2222-2222-222222222222"/>
+        </insert>
+        <insert tableName="role_permissions">
+            <column name="role_id" value="22222222-2222-2222-2222-222222222223"/>
+            <column name="permission_id" value="33333333-3333-3333-3333-333333333333"/>
+        </insert>
+        <insert tableName="role_permissions">
+            <column name="role_id" value="22222222-2222-2222-2222-222222222223"/>
+            <column name="permission_id" value="44444444-4444-4444-4444-444444444444"/>
+        </insert>
+        
+        <!-- Insert Admin User -->
+        <insert tableName="users">
+            <column name="id" value="11111111-1111-1111-1111-111111111113"/>
+            <column name="version" value="0"/>
+            <column name="created_at" valueDate="CURRENT_TIMESTAMP"/>
+            <column name="created_by" value="system"/>
+            <column name="updated_at" valueDate="CURRENT_TIMESTAMP"/>
+            <column name="updated_by" value="system"/>
+            <column name="active" valueBoolean="true"/>
+            <column name="username" value="admin"/>
+            <!-- BCrypt encoded password: admin123 -->
+            <column name="password" value="$2a$10$5QH9r7hV.G3C.fP1gJYQvuJG94K/5DHNN88qs2/BjKwH3CCH4MJEu"/>
+            <column name="email" value="admin@example.com"/>
+            <column name="first_name" value="System"/>
+            <column name="last_name" value="Administrator"/>
+            <column name="enabled" valueBoolean="true"/>
+            <column name="account_non_expired" valueBoolean="true"/>
+            <column name="account_non_locked" valueBoolean="true"/>
+            <column name="credentials_non_expired" valueBoolean="true"/>
+        </insert>
+        
+        <!-- Assign Admin Role to Admin User -->
+        <insert tableName="user_roles">
+            <column name="user_id" value="11111111-1111-1111-1111-111111111113"/>
+            <column name="role_id" value="22222222-2222-2222-2222-222222222223"/>
+        </insert>
+    </changeSet>
+</databaseChangeLog>
